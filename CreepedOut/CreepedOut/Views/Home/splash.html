@@ -1,0 +1,289 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>CreepedOut&trade; </title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="shortcut icon" href="../../img/favicon.png" type="image/x-icon">
+<style>
+/* Reset */
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+ margin:0;
+ padding:0;
+ border:0;
+ outline:0;
+ font-size:100%;
+ vertical-align:baseline;
+ background:transparent;
+}
+body {
+ line-height:1;
+}
+article,aside,details,figcaption,figure,
+footer,header,hgroup,menu,nav,section { 
+ display:block;
+}
+nav ul {
+ list-style:none;
+}
+blockquote, q {
+ quotes:none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+ content:'';
+ content:none;
+}
+a {
+ margin:0;
+ padding:0;
+ font-size:100%;
+ vertical-align:baseline;
+ background:transparent;
+}
+ins {
+ background-color:#ff9;
+ color:#000;
+ text-decoration:none;
+}
+mark {
+ background-color:#ff9;
+ color:#000; 
+ font-style:italic;
+ font-weight:bold;
+}
+del {
+ text-decoration: line-through;
+}
+abbr[title], dfn[title] {
+ border-bottom:1px dotted;
+ cursor:help;
+}
+table {
+ border-collapse:collapse;
+ border-spacing:0;
+}
+hr {
+ display:block;
+ height:1px;
+ border:0; 
+ border-top:1px solid #cccccc;
+ margin:1em 0;
+ padding:0;
+}
+input, select {
+ vertical-align:middle;
+}
+/* /reset */
+
+body {
+	text-align:center;
+	background:rgba(12,12,12,1);
+	color:rgba(255,255,255,1);
+	font:normal 13px/150% Helvetica, Arial, sans-serif;
+	font-size:12px}
+	
+.surround {
+	position:absolute;
+	top:0;
+	right:0;
+	bottom:0;
+	left:0}	
+	
+.log-in-container {
+	position:absolute;
+	top:50%;
+	left:50%;
+	width:300px;
+	height:250px;
+	margin-top:-125px;
+	margin-left:-150px;
+	background:rgba(255,255,255,0)}
+	
+section#splash-logo {
+	position:absolute;
+	height:100px;
+	width:300px;
+	top:50%;
+	margin-top:-50px;
+	background:transparent;
+	cursor:pointer}	
+	
+	section#splash-logo span {
+		display:block;
+		height:100px;
+		width:300px;
+		background-color:transparent;
+		background-repeat:no-repeat;
+		background-size:cover;
+		text-indent:-5000px}	
+	
+section#log-in {
+	position:absolute;
+	height:100px;
+	width:300px;
+	top:50%;
+	
+	background:transparent;
+	
+	visibility:hidden;
+	opacity:0}
+
+#log-in form {
+	background:transparent;
+	overflow:auto;
+	width:268px;
+	margin-left:7px}	
+	
+#log-in input {
+	border:0;
+	background:rgba(255,255,255,1);	
+	width:252px;
+	font-size:12px;
+	padding:8px;
+	margin-bottom:10px}
+	
+#log-in a {
+	display:block;
+	height:30px;
+	width:60px;
+	background:rgba(0,119,181,1);
+	border-radius:3px;
+	text-align:center;
+	line-height:30px;
+	float:right;
+	text-decoration:none;
+	color:rgba(255,255,255,1)}	
+	
+#log-in a:hover {
+	background:rgba(0,119,181,.9)}	
+	
+#log-in a.cancel {
+	background:rgba(255,255,255,0);
+	margin-right:10px;
+	color:rgba(255,255,255,.5)}	
+	
+#log-in a.cancel:hover {
+	background:rgba(255,255,255,.1);
+	color:rgba(255,255,255,.75)}	
+	
+.surround.surround-up #splash-logo {
+	top:20%;
+	 -webkit-transition: all 1s;
+    transition: all 1s;}
+	
+.surround.surround-up #log-in {
+	visibility:visible;
+	opacity:1;
+	 -webkit-transition: all 2s;
+    transition: all 2s;}		
+	
+.dark-theme .surround  {
+	background: rgb(51,51,51);
+	background: -moz-radial-gradient(center, ellipse cover,  rgba(51,51,51,1) 0%, rgba(17,17,17,1) 100%);
+	background: -webkit-radial-gradient(center, ellipse cover,  rgba(51,51,51,1) 0%,rgba(17,17,17,1) 100%);
+	background: radial-gradient(ellipse at center,  rgba(51,51,51,1) 0%,rgba(17,17,17,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#333333', endColorstr='#111111',GradientType=1 )}
+	
+.dark-theme section#splash-logo span {
+	background-image:url(../../img/co-logo-lt-trans.png)}	
+
+a {
+	-webkit-transition: all .15s ease-in-out;
+	-moz-transition: all .15s ease-in-out;
+	transition: all .15s ease-in-out}
+
+.pulse {
+  -webkit-animation-name: pulse;
+  animation-name: pulse;
+  -webkit-animation-duration: 2s;
+  animation-duration: 2s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-iteration-count: infinite;
+  -moz-animation-iteration-count: infinite;
+  animation-iteration-count: infinite}
+  
+  @-webkit-keyframes pulse {
+	  0% {
+		  -webkit-transform: scale3d(1, 1, 1);
+		  transform: scale3d(1, 1, 1);
+		  opacity:.9
+	  }
+	  50% {
+		  -webkit-transform: scale3d(1.05, 1.05, 1.05);
+		  transform: scale3d(1.05, 1.05, 1.05);
+		  opacity:1
+	  }
+	  100% {
+		  -webkit-transform: scale3d(1, 1, 1);
+		  transform: scale3d(1, 1, 1);
+		  opacity:.9
+	  }
+	}
+	  @keyframes pulse {
+	  0% {
+		  -webkit-transform: scale3d(1, 1, 1);
+		  transform: scale3d(1, 1, 1);
+		  opacity:.9
+	  }
+	  50% {
+		  -webkit-transform: scale3d(1.05, 1.05, 1.05);
+		  transform: scale3d(1.05, 1.05, 1.05);
+		  opacity:1
+	  }
+	  
+	  100% {
+		  -webkit-transform: scale3d(1, 1, 1);
+		  transform: scale3d(1, 1, 1);
+		  opacity:.9
+	  }
+  } 
+	</style>
+</head>
+<body class="dark-theme">
+    <div class="surround">
+        <div class="log-in-container">
+            <section id="splash-logo" class="pulse">
+                <span href="#" title="Log in to CreepedOut&trade;">
+                    CreepedOut&trade;
+                </span>
+            </section>
+            <section id="log-in">
+                <form action="">
+                    <input type="text" placeholder="Username" id="username" />
+                    <input type="password" placeholder="Password" id="password" />
+                    <a href="#" title="Log In">Log In</a>
+                    <a href="#" title="Cancel" class="cancel">Cancel</a>
+                </form>
+            </section>
+        </div>
+    </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
+<script>
+// Color Toggle
+$( ".theme-toggle" ).click(function() {
+   $("body").toggleClass( "dark-theme light-theme" );
+});
+// Log-in
+$( "#splash-logo span" ).click(function() {
+   $(".surround").addClass( "surround-up" );
+});
+// Log-in Cancel
+$( "#log-in a.cancel" ).click(function() {
+   $(".surround").removeClass( "surround-up" );
+});
+</script>
+</body>
+</html>
