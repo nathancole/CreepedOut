@@ -349,6 +349,12 @@ DAT.Globe = function(container, opts) {
     requestAnimationFrame(animate);
     render();
   }
+  
+  function reset() {
+    this.scene.remove(this.points);
+    this.points = null;
+    render();
+  }
 
   function render() {
     zoom(curZoomSpeed);
@@ -368,6 +374,7 @@ DAT.Globe = function(container, opts) {
 
   init();
   this.animate = animate;
+  this.reset = reset;
 
 
   this.__defineGetter__('time', function() {
