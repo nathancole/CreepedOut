@@ -7,6 +7,7 @@ $(document).ready(function () {
         for (var i = 0; i < creepyThings.length; i++) {
             creepyThings[i].DocContentToLower = creepyThings[i].DocContent.toLowerCase();
         }
+        updateMap(data);
     });
 });
 
@@ -30,11 +31,74 @@ $('#search-text').on('input', function () {
         return creepyThing.hits > 0;
     });
 
-    updateMap(filteredThings);
+    updateMap({'value': filteredThings});
 
 });
 
 
-function updateMap(filteredThings) {
+function updateMap(data) {
+    
+    
+    var settime = function(globe, t) {
+        return function() {
+            new TWEEN.Tween(globe).to({time: t/years.length},500).easing(TWEEN.Easing.Cubic.EaseOut).start();
+            var y = document.getElementById('year'+years[t]);
+            if (y.getAttribute('class') === 'year active') {
+            return;
+            }
+            var yy = document.getElementsByClassName('year');
+            for(i=0; i<yy.length; i++) {
+            yy[i].setAttribute('class','year');
+            }
+            y.setAttribute('class', 'year active');
+        };
+    };
+    
+    
+    window.globe.reset();
+    var value = 0;
+    var arry = [];
+    var group = {};
+    var maxGroupCount = 0;
+    for (i=0;i<data.value.length;i++) {
+        if(data.value[i].Latitude)
+        {
+        var key = data.value[i].Latitude + '|' + data.value[i].Longitude;
+        if(!group[key]) {
+            value = Math.min(value  + 0.1, 1);
+            group[key] = { 'lat': data.value[i].Latitude, 'lng': data.value[i].Longitude, 'value': value, 'itemCount': 1 };
+        }
+        else
+        {
+            group[key].value += Math.random();
+            group[key].itemCount += 1;
+        }
+        
+        maxGroupCount = Math.max(maxGroupCount, group[key].itemCount);
+        }
+    }
+    console.log('maxGroupCount: ' + maxGroupCount);
+    //loop through the grouped items and format them
+    for(key in group)
+    {
+        if(group.hasOwnProperty(key))
+        {
+            arry.push(group[key].lat);
+            arry.push(group[key].lng);
+            arry.push(group[key].value / maxGroupCount);
+            // arry.push(data.value[i].Latitude);
+            // arry.push(data.value[i].Longitude);
+            // arry.push((Math.random() ));
+        }
+    }
 
+    var formattedData = [["sample", arry]];
+    //window.data = formattedData;
+    for (i=0;i<formattedData.length;i++) {
+        window.globe.addData(formattedData[i][1], {format: 'magnitude', name: formattedData[i][0], animated: false});
+    }
+    window.globe.createPoints();
+    settime(window.globe,0)();
+    window.globe.animate();
+    document.body.style.backgroundImage = 'none'; // remove loading
 }
