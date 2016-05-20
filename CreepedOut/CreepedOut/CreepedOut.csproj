@@ -228,6 +228,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\creeped-out-map.css" />
     <Content Include="Content\creeped-out.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -263,11 +264,14 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <Content Include="img\ce.png" />
     <Content Include="img\co-logo-all-white-cutout-trans.png" />
     <Content Include="img\co-logo-dk-trans.png" />
     <Content Include="img\co-logo-lt-cutout-trans.png" />
     <Content Include="img\co-logo-lt-trans.png" />
     <Content Include="img\favicon.png" />
+    <Content Include="img\loading.gif" />
+    <Content Include="img\world.jpg" />
     <Content Include="Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
@@ -286,6 +290,8 @@
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\Detector.js" />
+    <Content Include="Scripts\globe.js" />
     <Content Include="Scripts\jquery-2.2.3.js" />
     <Content Include="Scripts\jquery-2.2.3.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
@@ -293,6 +299,8 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\three.min.js" />
+    <Content Include="Scripts\Tween.js" />
     <Content Include="Views\Home\splash.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
