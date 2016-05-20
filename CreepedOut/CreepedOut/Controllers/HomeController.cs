@@ -10,8 +10,14 @@ namespace CreepedOut.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Title = "Home Page";
+            ViewBag.Title = "Creeped Out";
 
+            return View();
+        }
+
+        public ActionResult MappedOut()
+        {
+            ViewBag.Title = "Mapped Out";
             return View();
         }
     }
