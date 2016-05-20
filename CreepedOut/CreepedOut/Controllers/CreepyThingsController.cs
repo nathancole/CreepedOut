@@ -42,109 +42,109 @@ namespace CreepedOut.Controllers
             return SingleResult.Create(db.CreepyThings.Where(creepyThing => creepyThing.CreepyThingID == key));
         }
 
-        // PUT: odata/CreepyThings(5)
-        public IHttpActionResult Put([FromODataUri] int key, Delta<CreepyThing> patch)
-        {
-            Validate(patch.GetEntity());
+        //// PUT: odata/CreepyThings(5)
+        //public IHttpActionResult Put([FromODataUri] int key, Delta<CreepyThing> patch)
+        //{
+        //    Validate(patch.GetEntity());
 
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
 
-            CreepyThing creepyThing = db.CreepyThings.Find(key);
-            if (creepyThing == null)
-            {
-                return NotFound();
-            }
+        //    CreepyThing creepyThing = db.CreepyThings.Find(key);
+        //    if (creepyThing == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            patch.Put(creepyThing);
+        //    patch.Put(creepyThing);
 
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CreepyThingExists(key))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+        //    try
+        //    {
+        //        db.SaveChanges();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!CreepyThingExists(key))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
 
-            return Updated(creepyThing);
-        }
+        //    return Updated(creepyThing);
+        //}
 
-        // POST: odata/CreepyThings
-        public IHttpActionResult Post(CreepyThing creepyThing)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        //// POST: odata/CreepyThings
+        //public IHttpActionResult Post(CreepyThing creepyThing)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
 
-            db.CreepyThings.Add(creepyThing);
-            db.SaveChanges();
+        //    db.CreepyThings.Add(creepyThing);
+        //    db.SaveChanges();
 
-            return Created(creepyThing);
-        }
+        //    return Created(creepyThing);
+        //}
 
-        // PATCH: odata/CreepyThings(5)
-        [AcceptVerbs("PATCH", "MERGE")]
-        public IHttpActionResult Patch([FromODataUri] int key, Delta<CreepyThing> patch)
-        {
-            Validate(patch.GetEntity());
+        //// PATCH: odata/CreepyThings(5)
+        //[AcceptVerbs("PATCH", "MERGE")]
+        //public IHttpActionResult Patch([FromODataUri] int key, Delta<CreepyThing> patch)
+        //{
+        //    Validate(patch.GetEntity());
 
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
 
-            CreepyThing creepyThing = db.CreepyThings.Find(key);
-            if (creepyThing == null)
-            {
-                return NotFound();
-            }
+        //    CreepyThing creepyThing = db.CreepyThings.Find(key);
+        //    if (creepyThing == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            patch.Patch(creepyThing);
+        //    patch.Patch(creepyThing);
 
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CreepyThingExists(key))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+        //    try
+        //    {
+        //        db.SaveChanges();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!CreepyThingExists(key))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
 
-            return Updated(creepyThing);
-        }
+        //    return Updated(creepyThing);
+        //}
 
-        // DELETE: odata/CreepyThings(5)
-        public IHttpActionResult Delete([FromODataUri] int key)
-        {
-            CreepyThing creepyThing = db.CreepyThings.Find(key);
-            if (creepyThing == null)
-            {
-                return NotFound();
-            }
+        //// DELETE: odata/CreepyThings(5)
+        //public IHttpActionResult Delete([FromODataUri] int key)
+        //{
+        //    CreepyThing creepyThing = db.CreepyThings.Find(key);
+        //    if (creepyThing == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            db.CreepyThings.Remove(creepyThing);
-            db.SaveChanges();
+        //    db.CreepyThings.Remove(creepyThing);
+        //    db.SaveChanges();
 
-            return StatusCode(HttpStatusCode.NoContent);
-        }
+        //    return StatusCode(HttpStatusCode.NoContent);
+        //}
 
         protected override void Dispose(bool disposing)
         {

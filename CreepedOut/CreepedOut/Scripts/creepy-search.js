@@ -19,7 +19,7 @@ $('#search-text').on('input', function () {
 
         var text = $('#search-text').val()
         var words = text.split(',').map(function (a) {
-            return a.replace(' ', '').toLowerCase();
+            return a.trim().toLowerCase();
         }).filter(function (word) { return word != ''; });
 
         filteredThings = creepyThings.filter(function (creepyThing) {
@@ -88,10 +88,20 @@ function updateMap(data) {
         }
     }
     console.log('maxGroupCount: ' + maxGroupCount);
+
+    var minPercentMatch = group.reduce(function (a, b) {
+        return Math.min(a, b);
+    },1);
+
+    var maxPercentMatch = group.reduce(function (a, b) {
+        return Math.max(a, b);
+    }, 0);
+
     //loop through the grouped items and format them
     for (key in group) {
         if (group.hasOwnProperty(key)) {
             var percentMatch = group[key].hitPercentMatchTotal / group[key].itemCount;
+            
             arry.push(group[key].lat);
             arry.push(group[key].lng);
             arry.push(group[key].itemCount / maxGroupCount);
