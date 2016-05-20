@@ -230,6 +230,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\creeped-out-map.css" />
     <Content Include="Content\creeped-out.css" />
+    <Content Include="Scripts\creepy-search.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

@@ -87,3 +87,16 @@ a {
     bottom: 15px;
     right: 20px;
 }
+
+.form-control {
+    background: #ffffff;
+    border: none;
+}
+
+.input-panel {
+    margin: 20px;
+}
+#test {
+    background: pink;
+    height: 20px 
+}

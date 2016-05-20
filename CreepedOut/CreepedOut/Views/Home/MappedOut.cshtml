@@ -11,6 +11,13 @@
 
 <div style="position: fixed; top: 50px; bottom: 0; left: 0; right: 0" id="container"></div>
 <div style="position: fixed; top: 50px; bottom: 0; left: 0; right: 0; pointer-events: none;">
+
+    <div class="input-panel">
+
+        <input class="form-control" id="search-text" placeholder="buzz words" type="text" style="pointer-events: all;" />
+        
+    </div>
+
     <div style="display: none">
         <div id="currentInfo">
             <span id="year1990" class="year">1990</span>
@@ -30,6 +37,8 @@
 <script type="text/javascript" src="~/Scripts/three.min.js"></script>
 <script type="text/javascript" src="~/Scripts/Tween.js"></script>
 <script type="text/javascript" src="~/Scripts/globe.js"></script>
+<script src="~/Scripts/jquery-2.2.3.min.js"></script>
+<script src="~/Scripts/creepy-search.js"></script>
 <script type="text/javascript">
 
     if(!Detector.webgl){
