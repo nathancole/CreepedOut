@@ -89,14 +89,6 @@ function updateMap(data) {
     }
     console.log('maxGroupCount: ' + maxGroupCount);
 
-    var minPercentMatch = group.reduce(function (a, b) {
-        return Math.min(a, b);
-    },1);
-
-    var maxPercentMatch = group.reduce(function (a, b) {
-        return Math.max(a, b);
-    }, 0);
-
     //loop through the grouped items and format them
     for (key in group) {
         if (group.hasOwnProperty(key)) {
