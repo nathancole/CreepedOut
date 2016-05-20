@@ -99,25 +99,30 @@
       xhr2.open('GET', 'http://creepedout.azurewebsites.net/odata/CreepyThings', true);
       xhr2.onreadystatechange = function(e) {
         if (xhr2.readyState === 4) {
-          if (xhr2.status === 200) {
+            if (xhr2.status === 200) {
+                var value = 0;
             var data = JSON.parse(xhr2.responseText);
             var arry = [];
             var group = {};
+            var maxGroupCount = 0;
             for (i=0;i<data.value.length;i++) {
               if(data.value[i].Latitude)
               {
                 var key = data.value[i].Latitude + '|' + data.value[i].Longitude;
-                if(!group[key])
-                {
-                  group[key] = { 'lat': data.value[i].Latitude, 'lng': data.value[i].Longitude, 'value': Math.random() };
+                if(!group[key]) {
+                    value = Math.min(value  + 0.1, 1);
+                    group[key] = { 'lat': data.value[i].Latitude, 'lng': data.value[i].Longitude, 'value': value, 'itemCount': 1 };
                 }
                 else
                 {
                   group[key].value += Math.random();
+                  group[key].itemCount += 1;
                 }
+                
+                maxGroupCount = Math.max(maxGroupCount, group[key].itemCount);
               }
             }
-
+            console.log('maxGroupCount: ' + maxGroupCount);
             //loop through the grouped items and format them
             for(key in group)
             {
@@ -125,7 +130,7 @@
                 {
                     arry.push(group[key].lat);
                     arry.push(group[key].lng);
-                    arry.push(group[key].value);
+                    arry.push(group[key].value / maxGroupCount);
                     // arry.push(data.value[i].Latitude);
                     // arry.push(data.value[i].Longitude);
                     // arry.push((Math.random() ));
