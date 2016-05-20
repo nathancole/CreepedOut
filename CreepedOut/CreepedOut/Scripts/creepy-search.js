@@ -20,7 +20,7 @@ $('#search-text').on('input', function () {
         var text = $('#search-text').val()
         var words = text.split(',').map(function (a) {
             return a.replace(' ', '').toLowerCase();
-        });
+        }).filter(function (word) { return word != ''; });
 
         filteredThings = creepyThings.filter(function (creepyThing) {
             creepyThing.hits = 0;
@@ -30,13 +30,13 @@ $('#search-text').on('input', function () {
                         if (creepyThing.DocContentToLower.indexOf(words[i]) >= 0) {
                             creepyThing.hits += 1;
                         }
-                    } else if (words.length === 1) {
-                        creepyThing.hits = 1;
                     }
                 }
                 creepyThing.percentMatch = creepyThing.hits / words.length;
+            } else {
+                creepyThing.percentMatch = 1;
             }
-            return creepyThing.hits > 0;
+            return creepyThing.percentMatch > 0;
         });
 
         updateMap({ 'value': filteredThings });
@@ -62,9 +62,9 @@ function updateMap(data) {
     };
 
     var lerp = function (a, b, t) {
-       return a + t * (b - a);
+        return a + t * (b - a);
     };
-    
+
     window.globe.reset();
     var value = 0;
     var arry = [];
@@ -95,7 +95,7 @@ function updateMap(data) {
             arry.push(group[key].lat);
             arry.push(group[key].lng);
             arry.push(group[key].itemCount / maxGroupCount);
-            colorArryFactor.push({'r': lerp(1, 0, percentMatch), 'g': lerp(0, 1, percentMatch), 'b': 0 })
+            colorArryFactor.push({ 'r': lerp(1, 0, percentMatch), 'g': lerp(0, 1, percentMatch), 'b': 0 })
             // arry.push(data.value[i].Latitude);
             // arry.push(data.value[i].Longitude);
             // arry.push((Math.random() ));
@@ -105,7 +105,7 @@ function updateMap(data) {
     var formattedData = [["sample", arry]];
     //window.data = formattedData;
     for (i = 0; i < formattedData.length; i++) {
-        window.globe.addData(formattedData[i][1], {format: 'magnitude', name: formattedData[i][0], animated: false, color: colorArryFactor });
+        window.globe.addData(formattedData[i][1], { format: 'magnitude', name: formattedData[i][0], animated: false, color: colorArryFactor });
     }
     window.globe.createPoints();
     settime(window.globe, 0)();
