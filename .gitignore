@@ -1,0 +1,7 @@
+packages
+[Bb]in
+obj/
+.vs/
+
+*.user
+*.suo
