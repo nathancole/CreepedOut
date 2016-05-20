@@ -20,8 +20,10 @@ $('#search-text').on('input', function () {
     filteredThings = creepyThings.filter(function (creepyThing) {
         creepyThing.hits = 0;
         for (var i = 0; i < words.length; i++) {
-            if (creepyThing.DocContentToLower.indexOf(words[i]) >= 0) {
-                creepyThing.hits += 1;
+            if (words[i] != '') {
+                if (creepyThing.DocContentToLower.indexOf(words[i]) >= 0) {
+                    creepyThing.hits += 1;
+                };
             };
         }
         creepyThing.percentMatch = creepyThing.hits / words.length;
