@@ -383,7 +383,7 @@ DAT.Globe = function(container, opts) {
 
   this.__defineSetter__('time', function(t) {
     var validMorphs = [];
-    var morphDict = this.points.morphTargetDictionary;
+    var morphDict = this.points.morphTargetDictionary || {};
     for(var k in morphDict) {
       if(k.indexOf('morphPadding') < 0) {
         validMorphs.push(morphDict[k]);
@@ -394,14 +394,14 @@ DAT.Globe = function(container, opts) {
     var scaledt = t*l+1;
     var index = Math.floor(scaledt);
     for (i=0;i<validMorphs.length;i++) {
-      this.points.morphTargetInfluences[validMorphs[i]] = 0;
+       if (this.points.morphTargetInfluences) { this.points.morphTargetInfluences[validMorphs[i]] = 0; }
     }
     var lastIndex = index - 1;
     var leftover = scaledt - index;
     if (lastIndex >= 0) {
-      this.points.morphTargetInfluences[lastIndex] = 1 - leftover;
+      if (this.points.morphTargetInfluences) { this.points.morphTargetInfluences[lastIndex] = 1 - leftover; }
     }
-    this.points.morphTargetInfluences[index] = leftover;
+    if (this.points.morphTargetInfluences) { this.points.morphTargetInfluences[index] = leftover; }
     this._time = t;
   });
 
