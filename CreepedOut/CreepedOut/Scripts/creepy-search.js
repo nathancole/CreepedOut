@@ -13,76 +13,76 @@ $(document).ready(function () {
 
 
 $('#search-text').on('input', function () {
-    var text = $('#search-text').val()
-    var words = text.split(',').map(function (a) {
-        return a.trim().toLowerCase();
-    });
-    
-    filteredThings = creepyThings.filter(function (creepyThing) {
-        creepyThing.hits = 0;
-        for (var i = 0; i < words.length; i++) {
-            if (words[i] != '') {
-                if (creepyThing.DocContentToLower.indexOf(words[i]) >= 0) {
-                    creepyThing.hits += 1;
-                };
-            };
-        }
-        creepyThing.percentMatch = creepyThing.hits / words.length;
-        return creepyThing.hits > 0;
-    });
+    if (creepyThings) {
 
-    updateMap({'value': filteredThings});
+        var text = $('#search-text').val()
+        var words = text.split(',').map(function (a) {
+            return a.replace(' ', '').toLowerCase();
+        });
 
+        filteredThings = creepyThings.filter(function (creepyThing) {
+            creepyThing.hits = 0;
+            if (words.length > 0) {
+                for (var i = 0; i < words.length; i++) {
+                    if (words[i] != '') {
+                        if (creepyThing.DocContentToLower.indexOf(words[i]) >= 0) {
+                            creepyThing.hits += 1;
+                        }
+                    } else if (words.length === 1) {
+                        creepyThing.hits = 1;
+                    }
+                }
+                creepyThing.percentMatch = creepyThing.hits / words.length;
+            }
+            return creepyThing.hits > 0;
+        });
+
+        updateMap({ 'value': filteredThings });
+    }
 });
 
 
 function updateMap(data) {
-    
-    
-    var settime = function(globe, t) {
-        return function() {
-            new TWEEN.Tween(globe).to({time: t/years.length},500).easing(TWEEN.Easing.Cubic.EaseOut).start();
-            var y = document.getElementById('year'+years[t]);
+
+    var settime = function (globe, t) {
+        return function () {
+            new TWEEN.Tween(globe).to({ time: t / years.length }, 500).easing(TWEEN.Easing.Cubic.EaseOut).start();
+            var y = document.getElementById('year' + years[t]);
             if (y.getAttribute('class') === 'year active') {
-            return;
+                return;
             }
             var yy = document.getElementsByClassName('year');
-            for(i=0; i<yy.length; i++) {
-            yy[i].setAttribute('class','year');
+            for (i = 0; i < yy.length; i++) {
+                yy[i].setAttribute('class', 'year');
             }
             y.setAttribute('class', 'year active');
         };
     };
-    
-    
+
     window.globe.reset();
     var value = 0;
     var arry = [];
     var group = {};
     var maxGroupCount = 0;
-    for (i=0;i<data.value.length;i++) {
-        if(data.value[i].Latitude)
-        {
-        var key = data.value[i].Latitude + '|' + data.value[i].Longitude;
-        if(!group[key]) {
-            value = Math.min(value  + 0.1, 1);
-            group[key] = { 'lat': data.value[i].Latitude, 'lng': data.value[i].Longitude, 'value': value, 'itemCount': 1 };
-        }
-        else
-        {
-            group[key].value += Math.random();
-            group[key].itemCount += 1;
-        }
-        
-        maxGroupCount = Math.max(maxGroupCount, group[key].itemCount);
+    for (i = 0; i < data.value.length; i++) {
+        if (data.value[i].Latitude) {
+            var key = data.value[i].Latitude + '|' + data.value[i].Longitude;
+            if (!group[key]) {
+                value = Math.min(value + 0.1, 1);
+                group[key] = { 'lat': data.value[i].Latitude, 'lng': data.value[i].Longitude, 'value': value, 'itemCount': 1 };
+            }
+            else {
+                group[key].value += Math.random();
+                group[key].itemCount += 1;
+            }
+
+            maxGroupCount = Math.max(maxGroupCount, group[key].itemCount);
         }
     }
     console.log('maxGroupCount: ' + maxGroupCount);
     //loop through the grouped items and format them
-    for(key in group)
-    {
-        if(group.hasOwnProperty(key))
-        {
+    for (key in group) {
+        if (group.hasOwnProperty(key)) {
             arry.push(group[key].lat);
             arry.push(group[key].lng);
             arry.push(group[key].value / maxGroupCount);
@@ -94,11 +94,11 @@ function updateMap(data) {
 
     var formattedData = [["sample", arry]];
     //window.data = formattedData;
-    for (i=0;i<formattedData.length;i++) {
-        window.globe.addData(formattedData[i][1], {format: 'magnitude', name: formattedData[i][0], animated: false});
+    for (i = 0; i < formattedData.length; i++) {
+        window.globe.addData(formattedData[i][1], { format: 'magnitude', name: formattedData[i][0], animated: false });
     }
     window.globe.createPoints();
-    settime(window.globe,0)();
+    settime(window.globe, 0)();
     window.globe.animate();
     document.body.style.backgroundImage = 'none'; // remove loading
 }
