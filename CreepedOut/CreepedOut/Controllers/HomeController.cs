@@ -12,7 +12,7 @@ namespace CreepedOut.Controllers
         {
             ViewBag.Title = "Creeped Out";
 
-            return View();
+            return View("Stuff");
         }
 
         public ActionResult MappedOut()

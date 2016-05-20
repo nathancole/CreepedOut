@@ -11,21 +11,23 @@
 
 <h2>MappedOut</h2>
 
-<div id="container"></div>
-<div id="info">
-    <strong><a href="http://www.chromeexperiments.com/globe">WebGL Globe</a></strong> <span class="bull">&bull;</span> Created by the Google Data Arts Team <span class="bull">&bull;</span> Data acquired from <a href="http://sedac.ciesin.columbia.edu/gpw/">SEDAC</a>
+<div style="position: fixed; top: 50px; bottom: 0; left: 0; right: 0" id="container"></div>
+<div style="position: fixed; top: 50px; bottom: 0; left: 0; right: 0; pointer-events: none;">
+    <div id="info">
+        <strong><a href="http://www.chromeexperiments.com/globe">WebGL Globe</a></strong> <span class="bull">&bull;</span> Created by the Google Data Arts Team <span class="bull">&bull;</span> Data acquired from <a href="http://sedac.ciesin.columbia.edu/gpw/">SEDAC</a>
+    </div>
+    <div id="currentInfo">
+        <span id="year1990" class="year">1990</span>
+        <span id="year1995" class="year">1995</span>
+        <span id="year2000" class="year">2000</span>
+    </div>
+    <div id="title">
+        Creepy People
+    </div>
+    <a id="ce" href="http://www.chromeexperiments.com/globe">
+        @*<img src="~/img/co-logo-lt-trans.png" />*@
+    </a>
 </div>
-<div id="currentInfo">
-    <span id="year1990" class="year">1990</span>
-    <span id="year1995" class="year">1995</span>
-    <span id="year2000" class="year">2000</span>
-</div>
-<div id="title">
-    World Population
-</div>
-<a id="ce" href="http://www.chromeexperiments.com/globe">
-    <span>This is a Chrome Experiment</span>
-</a>
 <script type="text/javascript" src="~/Scripts/Detector.js"></script>
 <script type="text/javascript" src="~/Scripts/three.min.js"></script>
 <script type="text/javascript" src="~/Scripts/Tween.js"></script>
