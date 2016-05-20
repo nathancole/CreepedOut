@@ -6,6 +6,8 @@ $(document).ready(function () {
         creepyThings = data.value;
         for (var i = 0; i < creepyThings.length; i++) {
             creepyThings[i].DocContentToLower = creepyThings[i].DocContent.toLowerCase();
+            creepyThings[i].hits = 0;
+            creepyThings[i].percentMatch = 1;
         }
         updateMap(data);
     });
@@ -59,9 +61,14 @@ function updateMap(data) {
         };
     };
 
+    var lerp = function (a, b, t) {
+       return a + t * (b - a);
+    };
+    
     window.globe.reset();
     var value = 0;
     var arry = [];
+    var colorArryFactor = [];
     var group = {};
     var maxGroupCount = 0;
     for (i = 0; i < data.value.length; i++) {
@@ -69,12 +76,13 @@ function updateMap(data) {
             var key = data.value[i].Latitude + '|' + data.value[i].Longitude;
             if (!group[key]) {
                 value = Math.min(value + 0.1, 1);
-                group[key] = { 'lat': data.value[i].Latitude, 'lng': data.value[i].Longitude, 'value': value, 'itemCount': 1 };
+                group[key] = { 'lat': data.value[i].Latitude, 'lng': data.value[i].Longitude, 'value': value, 'itemCount': 1, 'hitPercentMatchTotal': 0 };
             }
             else {
                 group[key].value += Math.random();
                 group[key].itemCount += 1;
             }
+            group[key].hitPercentMatchTotal += data.value[i].percentMatch;
 
             maxGroupCount = Math.max(maxGroupCount, group[key].itemCount);
         }
@@ -83,9 +91,11 @@ function updateMap(data) {
     //loop through the grouped items and format them
     for (key in group) {
         if (group.hasOwnProperty(key)) {
+            var percentMatch = group[key].hitPercentMatchTotal / group[key].itemCount;
             arry.push(group[key].lat);
             arry.push(group[key].lng);
-            arry.push(group[key].value / maxGroupCount);
+            arry.push(group[key].itemCount / maxGroupCount);
+            colorArryFactor.push({'r': lerp(1, 0, percentMatch), 'g': lerp(0, 1, percentMatch), 'b': 0 })
             // arry.push(data.value[i].Latitude);
             // arry.push(data.value[i].Longitude);
             // arry.push((Math.random() ));
@@ -95,7 +105,7 @@ function updateMap(data) {
     var formattedData = [["sample", arry]];
     //window.data = formattedData;
     for (i = 0; i < formattedData.length; i++) {
-        window.globe.addData(formattedData[i][1], { format: 'magnitude', name: formattedData[i][0], animated: false });
+        window.globe.addData(formattedData[i][1], {format: 'magnitude', name: formattedData[i][0], animated: false, color: colorArryFactor });
     }
     window.globe.createPoints();
     settime(window.globe, 0)();
